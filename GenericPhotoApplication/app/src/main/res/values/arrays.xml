@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="flash_mode_names">
+        <item>On</item>
+        <item>Auto</item>
+        <item>Off</item>
+    </string-array>
+    <string-array name="camera_resolution_names">
+        <item>1 MP</item>
+        <item>2 MP</item>
+        <item>3 MP</item>
+        <item>4 MP</item>
+        <item>6 MP</item>
+        <item>8 MP</item>
+        <item>10 MP</item>
+        <item>12 MP</item>
+        <item>Full size</item>
+    </string-array>
+    <string-array name="camera_resolution_values">
+        <item>1000000</item>
+        <item>2000000</item>
+        <item>3000000</item>
+        <item>4000000</item>
+        <item>6000000</item>
+        <item>8000000</item>
+        <item>10000000</item>
+        <item>12000000</item>
+        <item>0</item>
+    </string-array>
+    <string-array name="domain_names">
+        <item>phototag.app</item>
+        <item>tallyflow.com</item>
+    </string-array>
+    <string-array name="starting_screen_names">
+        <item>Photo List</item>
+        <item>Camera</item>
+        <item>Tag Setup</item>
+    </string-array>
+
+</resources>

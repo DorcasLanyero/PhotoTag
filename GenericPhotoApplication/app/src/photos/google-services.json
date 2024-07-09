@@ -1,0 +1,69 @@
+{
+  "project_info": {
+    "project_number": "1015021990404",
+    "firebase_url": "https://phototag-tnb.firebaseio.com",
+    "project_id": "phototag-tnb",
+    "storage_bucket": "phototag-tnb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1015021990404:android:338a30c5b2f96ef121fb51",
+        "android_client_info": {
+          "package_name": "app.phototag.phototag_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1015021990404-26792n6hu3eb8ie8nrqvokevfj692af0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBT4yHjjMo9peLNt_EDttiu-FfCHmRzrkA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1015021990404-26792n6hu3eb8ie8nrqvokevfj692af0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1015021990404:android:015a444b57ca2fe421fb51",
+        "android_client_info": {
+          "package_name": "com.sdgsystems.collector.photos"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1015021990404-26792n6hu3eb8ie8nrqvokevfj692af0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBT4yHjjMo9peLNt_EDttiu-FfCHmRzrkA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1015021990404-26792n6hu3eb8ie8nrqvokevfj692af0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

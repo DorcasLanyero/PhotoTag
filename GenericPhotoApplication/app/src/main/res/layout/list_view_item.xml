@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.sdgsystems.collector.photos.ui.view.ListViewItemLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="150dp"
+    android:background="@android:color/white"
+    >
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:weightSum="1"
+        >
+
+        <RelativeLayout
+            android:id="@+id/imageLayout"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="5dp"
+            android:descendantFocusability="blocksDescendants"
+            android:layout_weight=".45">
+
+
+            <ImageView
+                android:id="@+id/non_network_image_view"
+                android:layout_width="150dp"
+                android:layout_centerInParent="true"
+                android:layout_height="150dp"
+
+                />
+
+            <ImageView
+                android:id="@+id/checkbox_image"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentBottom="true"
+                android:paddingLeft="14dp"
+                android:paddingBottom="14dp"
+                android:src="@android:drawable/checkbox_on_background"
+                android:visibility="gone" />
+
+            <ImageView
+                android:id="@+id/image_uploading_icon_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_margin="10dp"
+                android:visibility="gone"
+                app:srcCompat="@drawable/ic_sync_black_24dp" />
+
+            <ImageView
+                android:id="@+id/icoComment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentBottom="true"
+                android:padding="3dp"
+                app:srcCompat="@drawable/ic_baseline_comment_24" />
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:descendantFocusability="blocksDescendants"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight=".55"
+            android:orientation="vertical"
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="5dp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    app:srcCompat="@drawable/ic_access_time_black_24dp" />
+
+                <TextView
+                    android:id="@+id/meta_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:maxLines="10"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_margin="5dp"
+                >
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@drawable/ic_baseline_format_list_bulleted_24"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="5dp"
+                    />
+
+
+                <HorizontalScrollView
+                    android:id="@+id/categoryScrollCloud"
+                    android:layout_width="match_parent"
+                    android:layout_height="42dp"
+                    android:scrollbarThumbHorizontal="@null">
+
+                    <LinearLayout
+                        android:id="@+id/categoryCloud"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"></LinearLayout>
+                </HorizontalScrollView>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_margin="5dp"
+                >
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@drawable/ic_baseline_discount_24_black"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="5dp"
+                    />
+
+
+                <HorizontalScrollView
+                    android:id="@+id/tagScrollCloud"
+                    android:layout_width="match_parent"
+                    android:layout_height="42dp"
+                    android:scrollbarThumbHorizontal="@null">
+
+                    <LinearLayout
+                        android:id="@+id/tagCloud"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"></LinearLayout>
+                </HorizontalScrollView>
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</com.sdgsystems.collector.photos.ui.view.ListViewItemLayout>

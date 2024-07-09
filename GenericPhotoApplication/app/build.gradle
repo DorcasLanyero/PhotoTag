@@ -1,0 +1,255 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'com.google.firebase.crashlytics'
+apply plugin: 'com.google.gms.google-services'
+
+
+def versionNamePrefix = "PhotoTag"
+def versionNameLabel = "2.1.5-1"
+def idengine_version = "2.1.6"
+
+// Automatically create versionCode from versionNameLabel
+def (major, minor, patch, pre) = versionNameLabel.toLowerCase().replaceAll('-', '.').tokenize('.')
+if (pre == null) pre = "0"
+else pre = pre.replaceAll("[^0-9]", "")
+def version = sprintf("%d%03d%03d%02d", major as int, minor as int, patch as int, pre as int) as int
+
+// For debugging:
+// printf("Major %s Minor %s Patch %s Prelease %s\n", major, minor, patch, pre)
+// printf("versionCode %s\n", version)
+
+android {
+    compileSdkVersion 34
+    buildToolsVersion '34'
+    defaultConfig {
+        applicationId "com.sdgsystems.collector.photos"
+        minSdkVersion 24
+        targetSdkVersion 33
+
+        // 3 digits per field, plus 2 for prerelease:
+        // [001][001][005][26] = 1.1.5-prerelease26
+        // Leading zeroes truncated because that means octal
+        versionCode "${version}" as int
+        versionName "${versionNamePrefix}_${versionNameLabel}"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        vectorDrawables.useSupportLibrary = true
+        multiDexEnabled true
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = ["room.schemaLocation": "$projectDir/schemas".toString()]
+            }
+        }
+        sourceSets {
+            androidTest.assets.srcDirs += files("$projectDir/schemas".toString())
+        }
+    }
+
+    namespace = "com.sdgsystems.collector.photos"
+
+    compileOptions {
+        sourceCompatibility 17
+        targetCompatibility 17
+    }
+
+
+    signingConfigs {
+        debug {
+            if (System.getenv("BUILD_NUMBER") != null) {
+                storeFile file("/home/sdgbuild/keys/default.debug.keystore")
+            }
+        }
+
+        release {
+            storeFile file("/home/sdgbuild/keys/photos.release.keystore")
+            storePassword "${System.getenv("KEYSTORE_PW")}"
+            keyAlias "photos_release"
+            keyPassword "${System.getenv("KEY_PW")}"
+        }
+
+    }
+
+    buildTypes {
+        debug {
+            if(System.getenv("BUILD_NUMBER") != null) {
+                buildConfigField "Integer", "BUILD_NUMBER", "${System.getenv("BUILD_NUMBER")}"
+            } else {
+                buildConfigField "Integer", "BUILD_NUMBER", "-1"
+            }
+            buildConfigField "Boolean", "PRODUCTION", "${System.getenv("PRODUCTION")}"
+            minifyEnabled false
+            debuggable true
+            signingConfig signingConfigs.debug
+
+            versionNameSuffix "-debug"
+        }
+        release {
+            buildConfigField "Integer", "BUILD_NUMBER", "${System.getenv("BUILD_NUMBER")}"
+            buildConfigField "Boolean", "PRODUCTION", "${System.getenv("PRODUCTION")}"
+            minifyEnabled false
+            signingConfig signingConfigs.release
+        }
+
+
+        android.applicationVariants.all { variant ->
+            variant.outputs.all {
+                outputFileName = "${variant.versionName}.apk"
+            }
+        }
+    }
+
+    flavorDimensions "organization", "epxState"
+
+    android.buildFeatures.buildConfig true
+
+    productFlavors {
+
+        epxBuildIn {
+            dimension = "epxState"
+        }
+        noEpx {
+            dimension = "epxState"
+            versionNameSuffix ="-noEpx"
+        }
+        
+//        localNoAuth {
+//            dimension "organization"
+//            applicationId "com.sdgsystems.collector.photos"
+//            resValue "string", "file_provider", "com.sdgsystems.collector.photos.fileprovider"
+//            versionName = "${versionNamePrefix}_NoAuth_${versionNameLabel}"
+//
+//        }
+
+        photos {
+            dimension "organization"
+            applicationId "com.sdgsystems.collector.photos"
+            resValue "string", "file_provider", "com.sdgsystems.collector.photos.fileprovider"
+            versionName = "${versionNamePrefix}_Play_${versionNameLabel}"
+        }
+
+        madix {
+            dimension "organization"
+            applicationId "com.sdgsystems.collector.photos.madix"
+            versionName = "${versionNamePrefix}_Madix_${versionNameLabel}"
+            resValue "string", "file_provider", "com.sdgsystems.collector.photos.madix.fileprovider"
+
+        }
+    }
+
+    buildFeatures {
+        viewBinding = true
+    }
+}
+
+repositories {
+    jcenter()
+    flatDir {
+        dirs 'libs', 'libs/idengine'
+    }
+    maven { url "https://jitpack.io" }
+    maven { url 'https://dl.bintray.com/kotlin/kotlin-eap' }
+
+}
+
+android {
+    useLibrary 'org.apache.http.legacy'
+}
+
+configurations {
+    // Declare our custom dependency configurations.
+    // See https://developer.android.com/studio/build/dependencies.html
+    epxBuildInDebugImplementation
+    epxBuildInReleaseImplementation
+    // But it seems like there should be an easier way...
+    localNoAuthEpxBuildInDebugImplementation.extendsFrom    epxBuildInDebugImplementation
+    photosEpxBuildInDebugImplementation.extendsFrom         epxBuildInDebugImplementation
+    madixEpxBuildInDebugImplementation.extendsFrom          epxBuildInDebugImplementation
+    krmEpxBuildInDebugImplementation.extendsFrom            epxBuildInDebugImplementation
+    localNoAuthEpxBuildInReleaseImplementation.extendsFrom  epxBuildInReleaseImplementation
+    photosEpxBuildInReleaseImplementation.extendsFrom       epxBuildInReleaseImplementation
+    madixEpxBuildInReleaseImplementation.extendsFrom        epxBuildInReleaseImplementation
+    krmEpxBuildInReleaseImplementation.extendsFrom          epxBuildInReleaseImplementation
+}
+
+dependencies {
+
+    implementation 'androidx.work:work-runtime-ktx:2.7.1'
+    androidTestImplementation('androidx.test.espresso:espresso-core:3.1.0', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+
+    testImplementation 'junit:junit:4.12'
+
+    implementation project(":SyncableApplication")
+
+    //compileOnly files('libs/com.symbol.emdk.jar')
+    compileOnly files('libs/device.sdk.jar')
+    compileOnly files('libs/DataCollection.jar')
+    compileOnly 'com.symbol:emdk:9.1.1'
+
+    implementation files('libs/blueloggerclient-debug.aar')
+
+    implementation 'androidx.annotation:annotation:1.1.0'
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+    implementation 'androidx.exifinterface:exifinterface:1.3.2'
+    implementation 'androidx.multidex:multidex:2.0.1'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'androidx.preference:preference:1.1.1'
+    implementation 'androidx.vectordrawable:vectordrawable:1.1.0'
+    implementation 'androidx.percentlayout:percentlayout:1.0.0'
+    implementation 'com.android.volley:volley:1.2.0'
+    implementation 'com.google.android:flexbox:0.3.0'
+    implementation 'com.google.code.gson:gson:2.8.6'
+    implementation 'com.splitwise:tokenautocomplete:2.0.8@aar'
+    implementation 'com.squareup.okhttp3:okhttp:3.12.1'
+    implementation 'org.apache.httpcomponents:httpclient-android:4.3.5.1'
+    implementation files('libs/ChipCloud-3.0.5.aar')
+
+    implementation 'commons-io:commons-io:2.8.0'
+
+    implementation platform('com.google.firebase:firebase-bom:25.12.0')
+    implementation 'com.google.firebase:firebase-crashlytics'
+    //implementation 'com.google.firebase:firebase-analytics'
+
+    def camerax_version = "1.3.2"
+// CameraX core library using camera2 implementation
+    implementation "androidx.camera:camera-camera2:$camerax_version"
+// CameraX Lifecycle Library
+    implementation "androidx.camera:camera-lifecycle:$camerax_version"
+// CameraX View class
+    implementation "androidx.camera:camera-view:$camerax_version"
+
+    //Room
+    implementation 'androidx.room:room-runtime:2.4.3'
+    annotationProcessor 'androidx.room:room-compiler:2.4.3'
+    testImplementation 'androidx.room:room-testing:2.4.3'
+
+    epxBuildInImplementation fileTree(dir: 'libs', include: ['*.jar'], exclude: ['com.symbol.emdk.jar', 'com.sdgsystems.idengine.api.jar'])
+    epxBuildInImplementation 'com.google.android.gms:play-services-vision:20.1.3'
+    epxBuildInImplementation 'com.google.zxing:core:3.4.0'
+
+    debugImplementation(name: "Api-debug-${idengine_version}", ext: "aar")
+    releaseImplementation(name: "Api-release-${idengine_version}", ext: "aar")
+    epxBuildInDebugImplementation(name: "IDC-Scan-Driver-debug-${idengine_version}", ext: "aar")
+    epxBuildInDebugImplementation(name: "DeviceService-debug-${idengine_version}", ext: "aar")
+    epxBuildInDebugImplementation(name: "DeviceSettings-noLauncher-debug-${idengine_version}", ext: "aar")
+    epxBuildInDebugImplementation(name: "ServiceInternal-debug-${idengine_version}", ext: "aar")
+    epxBuildInReleaseImplementation(name: "IDC-Scan-Driver-release-${idengine_version}", ext: "aar")
+    epxBuildInReleaseImplementation(name: "DeviceService-release-${idengine_version}", ext: "aar")
+    epxBuildInReleaseImplementation(name: "DeviceSettings-noLauncher-release-${idengine_version}", ext: "aar")
+    epxBuildInReleaseImplementation(name: "ServiceInternal-release-${idengine_version}", ext: "aar")
+    //epxBuildInImplementation(name: "CodeCorpDriver-microscan-release", ext: "aar")
+    //epxBuildInImplementation(name: "SnapiDriver-release", ext: "aar")
+    //epxBuildInImplementation(name: "UsbDriverBase-release", ext: "aar")
+
+    noEpxImplementation fileTree(dir: 'libs', include: ['*.jar'], exclude: ['com.symbol.emdk.jar'])
+    implementation "androidx.core:core-ktx:1.7.0"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
+    implementation "androidx.recyclerview:recyclerview:1.2.1"
+    //material 3 components library
+    implementation 'com.google.android.material:material:1.13.0-alpha01'
+
+
+}

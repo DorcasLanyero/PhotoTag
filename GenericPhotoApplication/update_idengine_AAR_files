@@ -1,0 +1,21 @@
+#!/bin/bash
+
+if [ ! -d "$1" ]; then
+    echo -e "\nUsage: $0 <ID-Engine home directory>\n"
+    exit 1
+fi
+
+(cd "$1/All" && ./build_aars) || exit 1
+
+(cd app/libs
+
+    # Remove old ID-Engine files
+    git rm -f idengine/*
+
+    # Add new ID-Engine files
+    mkdir -p idengine
+    cp "$1/All/aar/"*.aar idengine || exit 1
+    git add idengine/* || exit 1
+)
+
+echo Done

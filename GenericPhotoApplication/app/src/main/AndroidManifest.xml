@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:style="http://schemas.android.com/apk/distribution">
+
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="true" />
+    <uses-feature
+        android:name="android.hardware.camera.autofocus"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.location.gps"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.nfc"
+        android:required="false" />
+
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.NFC" />
+
+    <uses-permission android:name="com.honeywell.decode.permission.DECODE" />
+    <uses-permission android:name="com.symbol.emdk.permission.EMDK" />
+    <queries>
+        <package android:name="com.symbol.emdk.emdkservice" />
+    </queries>
+
+    <queries>
+        <package android:name="com.google.android.apps.maps" />
+        <intent>
+            <action android:name="android.intent.action.VIEW" />
+            <data android:mimeType="text/plain" />
+        </intent>
+    </queries>
+
+
+    <application
+        android:name="com.sdgsystems.collector.photos.GenericPhotoApplication"
+        android:allowBackup="false"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher"
+        android:theme="@style/AppTheme"
+        tools:ignore="GoogleAppIndexingWarning"
+        tools:replace="android:icon,android:roundIcon, android:allowBackup">
+
+        <uses-library
+            android:name="com.symbol.emdk"
+            android:required="false" />
+
+        <uses-library
+            android:name="org.apache.http.legacy"
+            android:required="false" />
+
+        <activity
+            android:name="com.sdgsystems.collector.photos.ui.activity.ThumbnailListActivity"
+            android:launchMode="singleTask"
+            android:exported="true"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.app.searchable"
+                android:resource="@xml/searchable" />
+        </activity>
+        <activity android:name="com.sdgsystems.collector.photos.ui.activity.RedirectActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.sdgsystems.collector.photos.ui.activity.PhotoDetailActivity"
+            android:label="@string/title_activity_photo_detail"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme2"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name="com.sdgsystems.collector.photos.ui.activity.ImageSetupActivity"
+            android:label="Photo Tag"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme3"
+            android:windowSoftInputMode="adjustResize" />
+
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="@string/file_provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+
+        <activity
+            android:name="com.sdgsystems.collector.photos.ui.activity.PhotoZoomActivity"
+            android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.sdgsystems.collector.photos.ui.activity.PhotoDetailActivity" />
+        </activity>
+        <activity
+            android:name="com.sdgsystems.collector.photos.ui.activity.ImageCaptureActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.sdgsystems.collector.photos.ui.activity.ImageCaptureActivity_camera2"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.sdgsystems.collector.photos.ui.activity.ImageCaptureActivity_camerax"
+            android:screenOrientation="portrait" />
+        <activity
+            android:label="@string/settings"
+            android:name="com.sdgsystems.collector.photos.ui.activity.SettingsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.sdgsystems.collector.photos.ui.activity.ImageStatus"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.sdgsystems.collector.photos.ui.activity.LoginActivity"
+            android:screenOrientation="portrait" />
+    </application>
+
+</manifest>

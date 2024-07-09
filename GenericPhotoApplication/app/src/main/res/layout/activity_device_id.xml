@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_device_id"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.activity.RedirectActivity">
+
+
+    <Button
+        android:text="Login"
+        android:layout_width="200dp"
+        android:id="@+id/button"
+        android:layout_height="100dp"
+        android:textSize="30sp"
+        android:onClick="setDeviceID"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="146dp" />
+
+    <LinearLayout
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:layout_width="0px"
+        android:layout_height="0px" />
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/button"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="49dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/txtDeviceID"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter Device ID"
+            android:textSize="30sp"
+            android:layout_above="@+id/button"
+            android:layout_alignParentStart="true"
+            android:layout_marginBottom="26dp"
+            android:singleLine="true" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+</RelativeLayout>

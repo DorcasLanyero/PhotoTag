@@ -1,0 +1,46 @@
+<resources>
+    <string name="app_name">PhotoTag</string>
+    <string name="title_activity_photo_detail">Photo Detail</string>
+    <string name="downloaded_photo">downloaded photo</string>
+    <string name="reset">Refresh Images</string>
+    <string name="delete">Delete</string>
+    <string name="annotation">Comment</string>
+    <string name="tags">Tags</string>
+    <string name="search_title">Search</string>
+    <string name="search_hint">Tag Value...</string>
+    <string name="settings">Settings</string>
+    <string name="owners">Owners</string>
+    <string name="title_activity_settings">Settings</string>
+
+    <!-- Strings related to Settings -->
+
+    <string name="PENDING_UPLOAD">PENDING UPLOAD</string>
+    <string name="UPDATE_IMAGE_INTENT">com.sdgsystems.genericphotoapplication.UPDATE_IMAGES</string>
+    <string name="login">Log in</string>
+    <string name="logout">Log out</string>
+
+    <string name="default_subdomain"></string>
+    <string name="default_domain">phototag.app</string>
+    <string name="default_username"></string>
+    <string name="default_password"></string>
+
+    <!-- Branding Strings -->
+    <string name="pending_tag">Pending…</string>
+    <string name="no_scanners_avail">No scanners available</string>
+    <string name="select_scanner">Select scanner</string>
+    <string name="rememberpassword">Remember password?</string>
+    <string name="register_url">https://%s/#/registerAgreement</string>
+    <string name="scanner_settings">Scanner settings</string>
+    <string name="scan">Scan</string>
+    <string name="display_local_images">Display local images</string>
+    <string name="select_organization">Select Organization</string>
+    <string name="select_site">Select Site</string>
+    <string name="about">About</string>
+    <string name="list">List</string>
+    <string name="camera">Camera</string>
+    <string name="tag">Tag</string>
+    <string name="comment">Comment</string>
+    <string name="category">Select one or more categories</string>
+    <string name="register"><u>Sign up for a free account</u>.</string>
+
+</resources>

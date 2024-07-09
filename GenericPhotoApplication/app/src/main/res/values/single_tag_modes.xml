@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="single_tag_modes">
+        <item>Replace last scan</item>
+        <item>Replace all tags</item>
+    </array>
+
+    <array name="single_tag_mode_values">
+        <item>SINGLE_TAG_SCANNED_ONLY</item>
+        <item>SINGLE_TAG_ALL_TAGS</item>
+    </array>
+
+    <array name="single_tag_mode_summaries">
+        <item>Scanning a tag will replace previously scanned tags.</item>
+        <item>Scanning a tag will replace all other tags.</item>
+    </array>
+
+</resources>

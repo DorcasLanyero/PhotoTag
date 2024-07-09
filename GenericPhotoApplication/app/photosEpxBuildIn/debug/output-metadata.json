@@ -1,0 +1,20 @@
+{
+  "version": 3,
+  "artifactType": {
+    "type": "APK",
+    "kind": "Directory"
+  },
+  "applicationId": "com.sdgsystems.collector.photos",
+  "variantName": "photosEpxBuildInDebug",
+  "elements": [
+    {
+      "type": "SINGLE",
+      "filters": [],
+      "attributes": [],
+      "versionCode": 200100501,
+      "versionName": "PhotoTag_Play_2.1.5-1-debug",
+      "outputFile": "PhotoTag_Play_2.1.5-1-debug.apk"
+    }
+  ],
+  "elementType": "File"
+}

@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">Madix Photos</string>
+    <string name="title_activity_photo_detail">Photo Detail</string>
+    <string name="downloaded_photo">downloaded photo</string>
+    <string name="reset">Refresh Images</string>
+    <string name="delete">Delete</string>
+    <string name="annotation">Comment</string>
+    <string name="tags">Tags</string>
+    <string name="search_title">Search</string>
+    <string name="search_hint">Tag Value...</string>
+    <string name="settings">Settings</string>
+    <string name="owners">Owners</string>
+    <string name="title_activity_settings">Settings</string>
+
+    <!-- Strings related to Settings -->
+    <string name="default_domain">phototag.app/</string>
+    <string name="default_subdomain">madix</string>
+    <string name="default_username">madix@madixinc.com</string>
+    <string name="default_password">madix123!</string>
+    <string name="PENDING_UPLOAD">PENDING UPLOAD</string>
+    <string name="UPDATE_IMAGE_INTENT">com.sdgsystems.genericphotoapplication.UPDATE_IMAGES</string>
+    <string name="logout">Login</string>
+</resources>

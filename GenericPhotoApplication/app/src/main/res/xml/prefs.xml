@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:title="Settings"
+    app:iconSpaceReserved="false">
+    <PreferenceCategory
+        android:title="Camera Settings"
+        app:iconSpaceReserved="false">
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="PREF_SHUTTER_SOUND"
+            android:summary="Play an audible shutter sound when capturing images"
+            android:title="Shutter beep"
+            app:iconSpaceReserved="false" />
+        <ListPreference
+            android:defaultValue="Auto"
+            android:entries="@array/flash_mode_names"
+            android:entryValues="@array/flash_mode_names"
+            android:key="pref_flash_mode"
+            android:title="Flash mode"
+            android:summary="%s"
+            app:iconSpaceReserved="false" />
+        <ListPreference
+            android:defaultValue="0"
+            android:entries="@array/camera_resolution_names"
+            android:entryValues="@array/camera_resolution_values"
+            android:key="pref_camera_resolution"
+            android:title="Photo resolution"
+            android:summary="%s"
+            app:iconSpaceReserved="false" />
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:key="cat_ui_settings"
+        android:title="UI Settings"
+        app:iconSpaceReserved="false">
+        <ListPreference
+            android:defaultValue="Photo List"
+            android:entries="@array/starting_screen_names"
+            android:entryValues="@array/starting_screen_names"
+            android:key="pref_starting_screen"
+            android:title="Starting screen"
+            android:summary="%s"
+            app:iconSpaceReserved="false" />
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="PREF_OVERWRITE_TAGS"
+            android:summary="Clear tags and replace with the last barcode scanned on the photo list page"
+            android:title="Replace tags with scanned barcode"
+            app:iconSpaceReserved="false"/>
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="PREF_REQUIRE_TAG"
+            android:summary="Require a tag to capture photos"
+            android:title="Require a tag"
+            app:iconSpaceReserved="false"/>
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="PREF_ENABLE_CLEAR_TAGS"
+            android:summary="Enable timeout for clearing tag values"
+            android:title="Enable tag clearing"
+            app:iconSpaceReserved="false"/>
+        <EditTextPreference
+            android:defaultValue="120"
+            android:key="PREF_CLEAR_TAGS_TIMEOUT"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:title="Idle timeout to clear tags (secs)"
+            app:useSimpleSummaryProvider="true"
+            app:iconSpaceReserved="false"
+            app:dependency="PREF_ENABLE_CLEAR_TAGS"/>
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="PREF_SHOW_HIDDEN_IMAGES"
+            android:summary="Show hidden images"
+            android:title="Hidden images"
+            app:iconSpaceReserved="false"/>
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="PREF_SCAN_SINGLE_TAG"
+            android:title="Single tag scan"
+            app:iconSpaceReserved="false"/>
+        <ListPreference
+            android:defaultValue=""
+            android:key="PREF_SINGLE_TAG_MODE"
+            android:title="Single tag scan behavior"
+            android:dependency="PREF_SCAN_SINGLE_TAG"
+            android:entries="@array/single_tag_modes"
+            android:entryValues="@array/single_tag_mode_values"
+            app:iconSpaceReserved="false" />
+        <!-- <CheckBoxPreference android:key="PREF_DELETE_UPLOADED_IMAGES" android:title="Delete Uploaded Images" android:summary="Delete images from local storage after successful upload" android:defaultValue="true"  /> -->
+    </PreferenceCategory>
+    <PreferenceCategory android:title="NFC Settings" app:iconSpaceReserved="false">
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="PREF_SCAN_TAGS_WITH_NFC"
+            android:summary="Scan tags with NFC in preview screen"
+            android:title="Use NFC"
+            app:iconSpaceReserved="false"/>
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:key="barcode_settings"
+        android:title="Barcode Settings"
+        app:iconSpaceReserved="false">
+        <Preference
+            android:key="select_scanner"
+            android:title="Select scanner"
+            app:iconSpaceReserved="false"/>
+        <Preference
+            android:key="scanner_settings"
+            android:title="Scanner settings"
+            app:iconSpaceReserved="false"/>
+    </PreferenceCategory>
+    <PreferenceCategory android:title="Offline Settings"
+        app:iconSpaceReserved="false">
+
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="pref_limit_offline_photos"
+            android:title="Limit offline photos"
+            app:iconSpaceReserved="false" />
+        <EditTextPreference
+            android:defaultValue="100"
+            android:key="pref_offline_photo_limit"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:title="Offline photo limit"
+            app:useSimpleSummaryProvider="true"
+            app:iconSpaceReserved="false"
+            app:dependency="pref_limit_offline_photos"/>
+    </PreferenceCategory>
+    <PreferenceCategory android:title="Admin Settings"
+        app:iconSpaceReserved="false">
+
+        <EditTextPreference
+            android:defaultValue=""
+            android:key="pref_admin_pin"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:title="Settings PIN"
+            app:iconSpaceReserved="false"/>
+    </PreferenceCategory>
+</PreferenceScreen>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="domain_names">
+        <item>phototag.app</item>
+        <item>phototag.dev</item>
+        <item>tallyflow.com</item>
+    </string-array>
+
+</resources>
